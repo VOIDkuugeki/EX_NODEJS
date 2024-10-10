@@ -38,7 +38,8 @@ for (let {name, age, address } of users) {
     userCard.innerHTML = `<h2>${name}</h2>
                           <p>Age: ${age}</p>
                           <p>Address: ${address.street}, ${address.city}</p>`;
-    
+    userCard.className = "userCard";
+
     console.log(userCard);
     let userContainer = document.getElementById('userList');
     userContainer.appendChild(userCard);
