@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            transition: background-color 0.2s;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Restaurant List</h1>
+    <button id="openModalButton">Add Restaurant</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Cuisine</th>
+                <th>Location</th>
+                <th>Rating</th>
+                <th>Price Range</th>
+                <th>Opening Hours</th>
+                <th>Contact Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="restaurantTableBody">
+            <!-- Rows will be populated here -->
+        </tbody>
+    </table>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalButton">&times;</span>
+            <h2 id="modalTitle">Add a New Restaurant</h2>
+            <form id="restaurantForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+
+                <label for="cuisine">Cuisine</label>
+                <input type="text" id="cuisine" required>
+
+                <label for="address">Address</label>
+                <input type="text" id="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" required>
+
+                <label for="state">State</label>
+                <input type="text" id="state" required>
+
+                <label for="zip">Zip Code</label>
+                <input type="text" id="zip" required>
+
+                <label for="rating">Rating</label>
+                <input type="number" id="rating" min="0" max="5" step="0.1" required>
+
+                <label for="price_range">Price Range</label>
+                <select id="price_range" required>
+                    <option value="$">One Dollar Sign ($)</option>
+                    <option value="$$">Two Dollar Signs ($$)</option>
+                    <option value="$$$">Three Dollar Signs ($$$)</option>
+                </select>
+
+                <label for="opening_hours">Opening Hours</label>
+                <input type="text" id="opening_hours" placeholder="e.g., Monday: 12:00 PM - 9:00 PM" required>
+
+                <label for="contact_number">Contact Number</label>
+                <input type="text" id="contact_number" required>
+
+                <button type="submit" id="submitRestaurantButton">Add Restaurant</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="restaurants.js"></script>
+</body>
+
+</html>
