@@ -5,6 +5,8 @@
     "ejs": "^3.1.10",
     "epxress": "^0.0.1-security",
     "express": "^4.21.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.8.1",
     "mysql2": "^3.11.4"
   },
   "name": "nodejs-test",
