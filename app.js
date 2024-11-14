@@ -1,6 +1,6 @@
 const express = require('express');							
 const bodyParser = require('body-parser');							
-const rectangleRoutes = require('./routes/rectangleRoutes');							
+const squareRoutes = require('./routes/squareRoutes');							
 							
 const app = express();							
 const PORT = process.env.PORT || 5000;							
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 })
 							
 // Sử dụng routes							
-app.use('/rectangle', rectangleRoutes);							
+app.use('/square', squareRoutes);							
 							
 // Chạy ứng dụng							
 app.listen(PORT, () => {							
