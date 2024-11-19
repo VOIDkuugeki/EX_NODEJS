@@ -1,18 +1,34 @@
-const express = require("express");
-const app = express();
-const connectDB = require("./configs/database.js");
-const router = require("./routers");
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-connectDB();
-router(app);
-
-app.get("/", (req, res) => {
-    res.send("Welcome to the API");
-});
-
-app.listen(5000, ()=>{
-    console.log("Server run at port 5000");
-})
+const express = require('express');											
+const mongoose = require('mongoose');											
+const bodyParser = require('body-parser');											
+const methodOverride = require('method-override');											
+const productRoutes = require('./routes/productRoutes');											
+											
+const app = express();											
+const PORT = 3000;											
+											
+// Kết nối tới MongoDB											
+mongoose.connect('mongodb://localhost:27017/wdesign', {											
+useNewUrlParser: true,											
+useUnifiedTopology: true											
+})											
+.then(() => {											
+console.log('Connected to MongoDB');											
+})											
+.catch(err => {											
+console.error('Failed to connect to MongoDB', err);											
+});											
+											
+// Cấu hình middleware											
+app.set('view engine', 'ejs');											
+app.use(bodyParser.urlencoded({ extended: true }));											
+app.use(methodOverride('_method'));											
+app.use(express.static('public')); // Để phục vụ tệp tĩnh (CSS, JS)											
+											
+// Sử dụng routes											
+app.use('/products', productRoutes);											
+											
+// Khởi động server											
+app.listen(PORT, () => {											
+console.log(`Server is running on http://localhost:${PORT}`);											
+});											
