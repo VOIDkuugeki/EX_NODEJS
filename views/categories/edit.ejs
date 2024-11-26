@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Category</title>
+</head>
+
+<body>
+    <h1>Edit Category</h1>
+    <form id="edit-form" action="/categories/<%= category._id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= category.name %>" required>
+        
+        <button type="button" onclick="confirmAction('edit-form')">Update Category</button>
+        <button type="button" onclick="window.location.href='/'">Cancel</button>
+    </form>
+
+    <a href="/">Back to Home</a>
+
+    <script>
+        async function confirmAction(formId) {
+            if (confirm("Are you sure you want to proceed?")) {
+                const form = document.getElementById(formId);
+                const formData = new FormData(form);
+
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                alert(result.message);
+                if (response.ok) {
+                    window.location.href = '/';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

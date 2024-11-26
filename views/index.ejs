@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+
+<body>
+    <h1>Product List</h1>
+    <a href="/foods/new">Add New Product</a>
+    <ul>
+        <% products.forEach(product => { %>
+            <li>
+                <%= product.name %> - <%= product.price %> - 
+                <img src="<%= product.img %>" alt="<%= product.name %>" style="width:100px;height:auto;"> - 
+                <%= product.category_id.name %> - <%= product.address %>
+                <a href="/foods/<%= product._id %>/edit">Edit</a>
+                <form action="/foods/<%= product._id %>?_method=DELETE" method="POST" class="delete-form" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+
+    <h1>Category List</h1>
+    <a href="/categories/new">Add New Category</a>
+    <ul>
+        <% categories.forEach(category=> { %>
+            <li>
+                <%= category.name %>
+                    <a href="/categories/<%= category._id %>/edit">Edit</a>
+                    <form action="/categories/<%= category._id %>?_method=DELETE" method="POST" class="delete-form"
+                        style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+            </li>
+            <% }) %>
+    </ul>
+
+    <script>
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                alert(result.message);
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

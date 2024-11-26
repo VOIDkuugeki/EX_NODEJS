@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Food</title>
+</head>
+
+<body>
+    <h1>Add New Food</h1>
+    <form id="new-form" action="/foods" method="POST" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+
+        <label for="price">Price:</label>
+        <input type="number" name="price" required>
+
+        <label for="img">Image URL:</label>
+        <input type="file" name="img" required>
+
+        <label for="address">Address:</label>
+        <input type="text" name="address" required>
+
+        <label for="category">Category:</label>
+        <select name="category_id" required>
+            <% categories.forEach(category=> { %>
+                <option value="<%= category._id %>">
+                    <%= category.name %>
+                </option>
+                <% }) %>
+        </select>
+
+        <button type="button" onclick="confirmAction('new-form')">Add Food</button>
+        <button type="button" onclick="window.location.href='/'">Cancel</button>
+    </form>
+
+    <a href="/">Back to Home</a>
+
+    <script>
+        // async function confirmAction(formId) {
+        //     if (confirm("Are you sure you want to proceed?")) {
+        //         const form = document.getElementById(formId);
+        //         const formData = new FormData(form);
+        //         const data = {};
+        //         formData.forEach((value, key) => {
+        //             data[key] = value;
+        //         });
+
+        //         const response = await fetch(form.action, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify(formData)
+        //         });
+        //         const result = await response.json();
+        //         alert(result.message);
+        //         if (response.ok) {
+        //             window.location.href = '/';
+        //         }
+        //     }
+        // }
+        async function confirmAction(formId) {
+            if (confirm("Are you sure you want to proceed?")) {
+                const form = document.getElementById(formId);
+                const formData = new FormData(form);
+
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                alert(result.message);
+                if (response.ok) {
+                    window.location.href = '/';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
