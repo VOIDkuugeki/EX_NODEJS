@@ -8,14 +8,8 @@ const categorySchema = mongoose.Schema({
     },
     img: {
         type: String,
-        required: true,
-        validate: {
-            validator: function (v) {
-                return /^(http|https):\/\/[^ "]+$/.test(v);
-            },
-            message: props => `${props.value} is not a valid URL!`
-        }
-    }
+        required: true
+    },
 })
 
 module.exports = mongoose.model("category", categorySchema);

@@ -38,29 +38,6 @@
     <a href="/">Back to Home</a>
 
     <script>
-        // async function confirmAction(formId) {
-        //     if (confirm("Are you sure you want to proceed?")) {
-        //         const form = document.getElementById(formId);
-        //         const formData = new FormData(form);
-        //         const data = {};
-        //         formData.forEach((value, key) => {
-        //             data[key] = value;
-        //         });
-
-        //         const response = await fetch(form.action, {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             },
-        //             body: JSON.stringify(formData)
-        //         });
-        //         const result = await response.json();
-        //         alert(result.message);
-        //         if (response.ok) {
-        //             window.location.href = '/';
-        //         }
-        //     }
-        // }
         async function confirmAction(formId) {
             if (confirm("Are you sure you want to proceed?")) {
                 const form = document.getElementById(formId);
